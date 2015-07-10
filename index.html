@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+<script src="js/lib/jquery-2.1.4.js"></script>
+	<script src="js/lib/angular.js"></script>
+	<script src="js/lib/angular-sanitize.js"></script>
+	<script src="js/lib/globalize.js"></script> 
+	<script src="js/lib/dx.webappjs.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/controller/MainController.js"></script>
+	<script src="js/mqttws31.js"></script>
+	<script src="js/services/MqttService.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/dx.common.css">
+	<link rel="stylesheet" type="text/css" href="css/dx.light.css">
+</head>
+<body>
+	<div ng-controller="MainController">
+		<input type="text" ng-model="yourLocation">
+		<div dx-button="{
+			text: 'Update Location',
+			onClick: buttonClicked  
+			}"></div>
+
+		<div dx-map = "mapOptions"></div>
+	</div>
+</body>
+</html>
