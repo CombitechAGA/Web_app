@@ -1,7 +1,7 @@
 app.controller('MainController', ['$scope', 'MqttService', function($scope, mqttService){
-$scope.carMarkers = [];
-
-var addCarMarker = function (carID, location, text) {
+	$scope.carMarkers = [];
+	var selectedCarID = ""
+	var addCarMarker = function (carID, location, timestamp, fuel, speed, distanceTraveled) {
 
 	//om ID:et finnns, ta bort från arrayen
 	for(var car in $scope.carMarkers){
@@ -13,46 +13,75 @@ var addCarMarker = function (carID, location, text) {
 	}
 
 	$scope.carMarkers.push({
-			location: location,
-			carid: carID,
-			tooltip: {
-				text: text
-			}
-		});
+		location: location,
+		carid: carID,
+		timestamp: (new Date(parseInt(timestamp))).toLocaleString(),
+		fuel: fuel,
+		speed: speed,
+		distanceTraveled: distanceTraveled,
+		tooltip: {
+			text: "<strong> Car ID: "+carID+"</strong></br>" + "Timestamp: " + (new Date(parseInt(timestamp))).toLocaleString() + "</br>" + "Fuel: " + fuel + "</br>" + "Speed: " + speed + "</br>" + "Distance traveled: " + distanceTraveled + "</br>"
+		}
+	});
+
+	for(var i=0;i<$scope.carMarkers.length; i++){
+		if (selectedCarID === $scope.carMarkers[i].carid) {
+			$scope.selectedCarIndex= i;
+			$scope.carMarkers[i].iconSrc = "image/markedZbeeMarker2.png";
+			console.log("index är: " + i);
+		}	
+	}
+
+
 	$scope.$apply();
 }
 
 mqttService.connect(function(message){
-		addCarMarker(message.carID, message.latitude + ", " + message.longitude,"<strong> Car ID: "+message.carID+"</strong></br>" + "Timestamp: " + (new Date(parseInt(message.timestamp))).toLocaleString() + "</br>" + "Fuel: " + message.fuel + "</br>" + "Speed: " + message.speed + "</br>" + "Distance traveled: " + message.distanceTraveled + "</br>");
-		
-	});
+	addCarMarker(message.carID, message.latitude + ", " + message.longitude, message.timestamp, message.fuel, message.speed, message.distanceTraveled);
 
-				//"<strong> Car ID: "+message.carID+"</strong></br>" + "Timestamp: " + message.timestamp + "</br>" + "Fuel: " + message.fuel + "</br>" + "Speed: " + message.Speed + "</br>" + "Distance traveled: " + message.distanceTraveled + "</br>"
-/*mqttService.messageCallback = function(message){
-		$scope.carMarkers.push({
-			location: $scope.yourLocation,
-			tooltip: {
-				text: "<strong>"+message+"</strong></br>"
-			}
-		});
-	};	
-*/
-
-	$scope.buttonClicked = function(){
-		addCarMarker($scope.yourLocation,"<strong>"+"hej" +"</strong></br>");
-		console.log($scope.carMarkers);
-	};
+});
 
 $scope.mapOptions = {
+	height: 800,
+	width: "100%",
 	autoAdjust: false,
-	height: 1080,
-	width: 1500,
 	center: "Skane",
 	zoom: 9,
 	controls: true,
-	markerIconSrc: "/Users/thomasstrahl/Desktop/AngularWebApp/image/zbeeMarker2.png",
+	markerIconSrc: "image/zbeeMarker2.png",
 	bindingOptions: {
 		markers: 'carMarkers'
 	}
+};
+
+$scope.accordianOptions = {
+	bindingOptions: {
+		dataSource: 'carMarkers',
+	},
+	onContentReady: function(e){
+		e.component.expandItem($scope.selectedCarIndex)
+	},
+	collapsible: true,
+	multiple: false,
+	itemTemplate : "carTemplate",
+	onSelectionChanged : function(e){
+		if(e.addedItems.length>0){
+			selectedCarID = e.addedItems[0].carid;
+		}
+		else{
+			for(var i=0;i<$scope.carMarkers.length; i++){
+				if (selectedCarID === $scope.carMarkers[i].carid) {
+					$scope.carMarkers[i].iconSrc = "image/zbeeMarker2.png";
+					console.log("i else: " + i);
+				}	
+			}
+			selectedCarID = "";
+			$scope.$apply();
+		}
+		
+		console.log("selectedCarID: " + selectedCarID);
+
+	}
+
 };
 }]);

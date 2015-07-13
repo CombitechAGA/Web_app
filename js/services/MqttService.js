@@ -30,27 +30,34 @@ var messageCallback = function(message){
 };
 // called when a message arrives
 function onMessageArrived(message) {
-
 	var messageParameters = [];
 	messageParameters = message.payloadString.split(";");
 	console.log(messageParameters);
 	var valueList = [];
 	var values = {};
-
-	for (var param in messageParameters) {
-			console.log(param);
-			var temp = messageParameters[param].split(":");
-			valueList.push(temp[1]);
-			console.log(temp[1]);
+	var carID = messageParameters[0].split(":");
+	var temp = "";
+	for (var i = 1; i < carID.length; i++) {
+		temp += carID[i] + ":";	
 	}
+	temp = temp.substring(0, temp.length-1);
+	values.carID = temp;
 
-	values.carID = valueList[0];
-	values.timestamp = valueList[1];
-	values.fuel = valueList[2];
-	values.speed = valueList[3];
-	values.distanceTraveled = valueList[4];
-	values.longitude = valueList[5];
-	values.latitude = valueList[6]; 
+	for (var i = 1; i < messageParameters.length; i++) {
+		console.log(i + ": ");
+		var temp = messageParameters[i].split(":");
+		valueList.push(temp[1]);
+		console.log(temp[1]);
+	}
+	
+	values.timestamp = valueList[0];
+	values.fuel = valueList[1];
+	values.speed = valueList[2];
+	values.distanceTraveled = valueList[3];
+	values.longitude = valueList[4];
+	values.latitude = valueList[5]; 
+
+	console.log(valueList[4]);
 
 	console.log("onMessageArrived:"+message.payloadString);
 	messageCallback(values)
