@@ -49,13 +49,13 @@ function onMessageArrived(message) {
 		valueList.push(temp[1]);
 		console.log(temp[1]);
 	}
-	
-	values.timestamp = valueList[0];
+	var time = new Date(parseInt(valueList[0]));
+	values.timestamp = time.toLocaleTimeString();
+	values.date = time.toLocaleDateString();
 	values.fuel = valueList[1];
 	values.speed = valueList[2];
 	values.distanceTraveled = valueList[3];
-	values.longitude = valueList[4];
-	values.latitude = valueList[5]; 
+	values.location = valueList[4] + ", " + valueList[5];
 
 	console.log(valueList[4]);
 

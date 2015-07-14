@@ -1,6 +1,9 @@
 <!doctype html>
 <html ng-app="app">
 <head>
+	<link rel="stylesheet" href="css/dx.common.css">
+	<link rel="stylesheet" href="css/dx.dark.css" >
+	<link rel="stylesheet" href="css/bootstrap.css">
 	<script src="js/lib/jquery-2.1.4.js"></script>
 	<script src="js/lib/angular.js"></script>
 	<script src="js/lib/angular-sanitize.js"></script>
@@ -11,12 +14,9 @@
 	<script src="js/controller/MainController.js"></script>
 	<script src="js/mqttws31.js"></script>
 	<script src="js/services/MqttService.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/dx.common.css">
-	<link rel="stylesheet" type="text/css" href="css/dx.light.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
-<body>
-	<nav class="navbar navbar-default navbar-static-top">
+<body style="background-color:#343434">
+	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -40,9 +40,7 @@
 	<div class="container-fluid" ng-controller="MainController">
 		<div class="row">
 
-			<div class = "col-xs-9">
-
-
+			<div class = "col-xs-9" style="padding: 0; margin: 0">
 				<div dx-map = "mapOptions"></div>
 			</div>
 
@@ -50,14 +48,34 @@
 				<div dx-accordion="accordianOptions">
 					
 					<div data-options="dxTemplate : { name: 'title' } ">
-					<h2>{{carid}}</h1>
+					<h2>{{carID}}</h1>
 					</div>
 					<div data-options="dxTemplate : { name: 'carTemplate' } ">
+
 						<div class="accodion-item">
-						<strong>Timestamp: </strong>{{timestamp}}<br>
-						<strong>Fuel: </strong>{{fuel}}<br>
-						<strong>Speed: </strong>{{speed}}<br>
-						<strong>DistanceTraveled: </strong>{{distanceTraveled}}<br>
+						<div class="container-fluid">
+							<div class="row">
+								<div class = "col-md-6">
+									<h3>
+									<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> {{speed}} km/h <br>	
+									</h3>
+									<h3>
+									<span class="glyphicon glyphicon-road" aria-hidden="true"></span> {{distanceTraveled}} km
+									</h3>
+									<h3>
+									<span class="glyphicon glyphicon-flash" aria-hidden="true"></span> {{fuel * 100}} %	
+									</h3>
+								</div>
+								<div class = "col-md-6">
+									<h3>
+									<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{date}} <br>
+									</h3>
+									<h3>
+									<span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{timestamp}} <br>
+									</h3>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
