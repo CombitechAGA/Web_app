@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 var app = angular.module('app', ['dx', 'ui.router'])
 
 .config(function ($stateProvider) {
@@ -16,6 +14,3 @@ var app = angular.module('app', ['dx', 'ui.router'])
 .run(['$state', function ($state) {
    $state.transitionTo('dashboard');
 }])
-=======
-var app = angular.module('app', ['dx']);
->>>>>>> d5b11b6e32c33622f5ef48d2db587c1820ccbe35
