@@ -1,6 +1,12 @@
-app.controller('MainController', ['$scope', 'MqttService', function($scope, mqttService){
+app.controller('MainController', ['$scope','$interval', 'MqttService', function($scope,$interval, mqttService){
 	$scope.carMarkers = [];
 	$scope.selectedCarID = ""
+	$scope.selectedCarIndex =-1
+
+	//Borde bara köras när vi har databas (och då aktiveras när man klickar någon "show live data" knapp och sen stängas av när man klickar ur den.)
+	//$interval(function(){
+		//ta bort gammal data
+	//},10000)
 
 	var updateMarker = function(car) {
 		return {
