@@ -1,6 +1,7 @@
 app.controller('MainController', ['$scope', 'MqttService', function($scope, mqttService){
 	$scope.carMarkers = [];
 	$scope.selectedCarID = ""
+	$scope.selectedCarIndex = -1;
 
 	var updateMarker = function(car) {
 		return {
@@ -92,8 +93,12 @@ app.controller('MainController', ['$scope', 'MqttService', function($scope, mqtt
 		},
 		onContentReady: function(e) {
 			$scope.accordionComponent = e.component;
-			if ($scope.selectedCarIndex >= 0)
+			if ($scope.selectedCarIndex >= 0) {
+				console.log("nu öppnas accordionComponent");
 				e.component.expandItem($scope.selectedCarIndex)
+			} else if ($scope.selectedCarIndex === -1) {
+				e.component.collapseItem(0);
+			}
 		},
 		collapsible: true,
 		multiple: false,

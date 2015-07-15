@@ -27,13 +27,17 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Zbee Dashboard hej!</a>
+				<a class="navbar-brand" ui-sref="dashboard"> <img style="max-width:100px; margin-top: -12px;
+				max-height:50px"
+             src="/image/markedZbeeMarker2.png"></a>
+
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav nav-pills">
-					<li><a href="#">Info</a></li>
+				<ul class="nav navbar-nav">
+					<li ui-sref-active="active"><a ui-sref="dashboard">Live</a></li>
+					<li ui-sref-active="active"><a ui-sref="statistics">Statistics</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
