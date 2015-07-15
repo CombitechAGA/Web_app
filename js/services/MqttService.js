@@ -55,10 +55,10 @@ function onMessageArrived(message) {
 	values.fuel = valueList[1];
 	values.speed = valueList[2];
 	values.distanceTraveled = valueList[3];
-	values.location = valueList[4] + ", " + valueList[5];
+	values.location = valueList[5] + ", " + valueList[4];
 
-	console.log(valueList[4]);
-
+	console.log("första"+valueList[4]);
+	console.log("andra"+valueList[5]);
 	console.log("onMessageArrived:"+message.payloadString);
 	messageCallback(values)
 }
