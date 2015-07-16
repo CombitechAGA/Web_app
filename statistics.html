@@ -1,32 +1,22 @@
+<!-- 
+
 <div class="container-fluid">
-	
-	<div class="row">
-		
-		<div dxPieChart({
-        dataSource: 
-    [{ continent: 'Africa', population: 1022234000 },
-    { continent: 'Antarctica', population: 4490 },
-    { continent: 'Asia', population: 4164252000 },
-    { continent: 'Australia', population: 29127000 },
-    { continent: 'Europe', population: 738199000 },
-    { continent: 'North America', population: 542056000 },
-    { continent: 'South America', population: 392555000 }
-],
-        series: {
-            argumentField: 'continent',
-            valueField: 'population',
-            label: {
-                visible: true,
-                format: 'largeNumber',
-                precision: 1,
-                connector: { visible: true }
-            }
-        },
-        title: 'Population by Continent',
-        animation: {
-            duration: 3000,
-            easing: 'linear'
-        }
-    }) style="height:400px;max-width:600px;margin: 0px auto"></div>
+
+
+ <div id="pieChartContainer" style="height:400px; max-width:700px; margin: 0 auto"></div>
+
+</div> -->
+<div class="row">
+
+	<div class = "col-xs-4">
+		<div  style="padding-left: 10px">
+		<input type="text" ng-model="location">
+		<button ng-click='updateLocation()'>Hitta Position</button>
+		<div dx-map = "mapOptions"></div>
+		</div>
 	</div>
+<div class = "col-xs-8" style="padding: 0; margin: 0">
+	<div dx-pie-chart="pieChartOptions"></div>
+	<div dx-chart="chartOptions"></div>
+</div>
 </div>
