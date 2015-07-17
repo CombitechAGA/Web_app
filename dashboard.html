@@ -18,21 +18,21 @@
 							<div class="row">
 								<div class = "col-md-6">
 									<h3>
-									<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> {{speed}} km/h <br>	
+									<span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> {{speed | number:1}} km/h
 									</h3>
 									<h3>
-									<span class="glyphicon glyphicon-road" aria-hidden="true"></span> {{distanceTraveled}} km
+									<span class="glyphicon glyphicon-road" aria-hidden="true"></span> {{distanceTraveled}} km 
 									</h3>
 									<h3>
-									<span class="glyphicon glyphicon-flash" aria-hidden="true"></span> {{fuel * 100}} %	
+									<span class="glyphicon glyphicon-flash" aria-hidden="true"></span> {{fuel | number:0}} %	
 									</h3>
 								</div>
 								<div class = "col-md-6">
 									<h3>
-									<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{date}} <br>
+									<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{date}}
 									</h3>
 									<h3>
-									<span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{timestamp}} <br>
+									<span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{timestamp}}
 									</h3>
 								</div>
 							</div>

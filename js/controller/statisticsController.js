@@ -1,4 +1,19 @@
-app.controller('statisticsController', ['$scope', function($scope){
+//app.controller('statisticsController', ['$scope', function($scope){
+app.controller('statisticsController', ['$scope', 'DataBaseService', function($scope, dataBaseService){
+//dataBaseService.getRoutes($scope.carId, $scope.startDate, $scope.endDate)
+     //.then(function(data) {
+       //  $scope.routesList = data;
+    //}
+    //här borde det användas promise smidigt sätt att använda http GET från databasen kanske? asynchron 
+   // );
+
+var employees = dataBaseService.getEmployees();
+$scope.lookUpOptions = {
+    bindingOptions: {
+        dataSource: 'employees'
+    },
+    searchEnabled: true
+};
 
 
 $scope.dataSource = [{

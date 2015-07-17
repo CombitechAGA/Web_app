@@ -14,6 +14,11 @@ var app = angular.module('app', ['dx', 'ui.router'])
 		controller: 'statisticsController'
 		
 	})
+	.state('routes', {
+		url: '/routes',
+		templateUrl: 'routes.html',
+		controller: 'statisticsController'
+	})
 
 })
 
