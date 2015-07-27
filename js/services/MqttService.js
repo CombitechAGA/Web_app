@@ -2,14 +2,14 @@ app.factory('MqttService', function(){
 
 var connectMqtt = function () {
 		// Create a client instance
-	client = new Paho.MQTT.Client("81.236.122.138", 8000, "clientId");
+	client = new Paho.MQTT.Client("mqtt.phelicks.net", 9001, "clientId");
 
 	// set callback handlers
 	client.onConnectionLost = onConnectionLost;
 	client.onMessageArrived = onMessageArrived;
 
 	// connect the client
-	client.connect({onSuccess:onConnect});
+	client.connect({userName:"cab", password:"sjuttongubbar", onSuccess:onConnect});
 };
 
 // called when the client connects
