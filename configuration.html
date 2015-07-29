@@ -1,0 +1,26 @@
+<div class="row">
+	<div class = "col-md-5">
+		<input type="text" class="form-control" ng-model="subscribe">
+		<br>
+		<input type="text" class="form-control" ng-model="ip">
+		<br>
+		<input type="text" class="form-control" ng-model="deviceName">
+	</div>
+	<div class = "col-md-1">
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='subscribeToTopic()' type="submit">Subscribe</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateIP()' type="submit">Update</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateName()' type="submit">Update</button>
+	</div>
+	<div class = "col-md-5">
+		<input type="text" class="form-control" ng-model="unSubscribe">
+		<br>
+		<input type="text" class="form-control" ng-model="connectionPort">
+		<br>
+		<input type="text" class="form-control" ng-model="interval">
+	</div>
+	<div class = "col-md-1">
+		<button style="margin-bottom:20px;" class="btn btn-danger" ng-click='unSubscribeToTopic()' type="submit">Unsubscribe</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updatePort()' type="submit">Update</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateInterval()' type="submit">Update</button>
+	</div>
+</div>

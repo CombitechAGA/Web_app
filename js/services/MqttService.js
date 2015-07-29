@@ -1,5 +1,12 @@
 app.factory('MqttService', function(){
 
+var	updateConfig = function(argument){
+
+	message = new Paho.MQTT.Message(argument);
+  	message.destinationName = "set/config";
+  	client.send(message);
+};
+
 var connectMqtt = function () {
 		// Create a client instance
 	client = new Paho.MQTT.Client("mqtt.phelicks.net", 9001, "clientId");
@@ -27,6 +34,8 @@ console.log("onConnectionLost:"+responseObject.errorMessage);
 }
 
 var messageCallback = function(message){
+};
+var test = function(message){
 };
 // called when a message arrives
 function onMessageArrived(message) {
@@ -61,13 +70,17 @@ function onMessageArrived(message) {
 	console.log("andra"+valueList[5]);
 	console.log("onMessageArrived:"+message.payloadString);
 	messageCallback(values)
-}
+};
 
 return {
 
 	connect: function (callback) {
 		messageCallback = callback;
 		connectMqtt();
+	},
+
+	test: function(argument) {
+		updateConfig(argument);
 	}
 };
 });
