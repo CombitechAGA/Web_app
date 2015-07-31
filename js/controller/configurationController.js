@@ -1,47 +1,55 @@
 app.controller('configurationController', ['$scope', 'MqttService', function($scope, mqttService){ 
 
-	$scope.subscribe = "New subscribe topic";
-	$scope.unSubscribe = "Unsubscribe to topic";
-	$scope.ip = "New ip-address";
-	$scope.connectionPort = "New port";
-	$scope.interval = "New snapshot-interval";
-	$scope.deviceName = "New device name";
-
+	$scope.subscribe = "New subscribe topic.";
+	$scope.unSubscribe = "Unsubscribe to topic.";
+	$scope.ip = "New ip-address.";
+	$scope.connectionPort = "New port.";
+	$scope.interval = "New snapshot-interval.";
+	$scope.deviceName = "New device name.";
+	$scope.carID = "Car id must be entered or the update will fail!";
 
 	$scope.subscribeToTopic = function(){
-		console.log("Nu kicka du på Subscribe");
-		mqttService.test("id:"+ "bil id" + ";subscribe:"+$scope.subscribe);
-
+		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.test("id:"+ $scope.carID + ";subscribe:"+$scope.subscribe);
 	};
 
 	$scope.unSubscribeToTopic = function(){
-		console.log("Nu kicka du på unSubscribe");
-		mqttService.test("id:"+ "bil id" + ";unsubscribe:"+$scope.unSubscribe);
+		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.test("id:"+ $scope.carID + ";unsubscribe:"+$scope.unSubscribe);
 	};
 
 	$scope.updateIP = function(){
-		console.log("Nu kicka du på ip");
-		mqttService.test("id:"+ "bil id" + ";ip:"+$scope.ip);
-
+		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.test("id:"+ $scope.carID + ";ip:"+$scope.ip);
 	};
 
 	$scope.updatePort = function(){
-		console.log("Nu kicka du på port");
-		mqttService.test("id:"+ "bil id" + ";port:"+$scope.connectionPort);
-
+		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.test("id:"+ $scope.carID + ";port:"+$scope.connectionPort);
 	};
 
 	$scope.updateName = function(){
-		console.log("Nu kicka du på name");
-		mqttService.test("id:"+ "bil id" + ";devicename:"+$scope.deviceName);
-
+		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.test("id:"+ $scope.carID + ";devicename:"+$scope.deviceName);
 	};
 	$scope.updateInterval = function(){
-		console.log("Nu kicka du på interval");
-		mqttService.test("id:"+ "bil id" + ";interval:"+$scope.interval);
-
+		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.test("id:"+ $scope.carID+ ";interval:"+$scope.interval);
 	};
 
-
-
+	$scope.submitCarID = function(){
+		console.log("Nu kicka du på device id");
+	};	
 }]);
