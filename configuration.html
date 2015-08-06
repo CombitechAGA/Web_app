@@ -7,8 +7,6 @@
 		<input type="text" class="form-control" ng-model="subscribe">
 		<br>
 		<input type="text" class="form-control" ng-model="unSubscribe">
-		
-		
 	</div>
 	<div class = "col-md-1">
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='submitCarID()' type="submit">Submit</button>
@@ -28,7 +26,13 @@
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updatePort()' type="submit">Update</button>
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateInterval()' type="submit">Update</button>
 
-		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateName()' type="submit">Update</button>
-		
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateName()'type="submit">Update</button>
 	</div>
 </div>
+
+<table style="color:green">
+	<tr ng-repeat="x in configObjects">
+		<td>{{x.Key}}</td>
+		<td>{{x.Value}}</td>
+		</tr>
+</table>

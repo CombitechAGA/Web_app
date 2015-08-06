@@ -6,6 +6,14 @@ var	updateConfig = function(argument){
   	message.destinationName = "set/config";
   	client.send(message);
 };
+var globalDeviceID;
+var requestConfig = function(deviceID){
+	globalDeviceID = deviceID;
+	client.subscribe(deviceID + "/config");
+	message = new Paho.MQTT.Message(deviceID);
+	message.destinationName = "request/config";
+	client.send(message);
+};
 
 var connectMqtt = function () {
 		// Create a client instance
@@ -24,6 +32,7 @@ function onConnect() {
 // Once a connection has been made, make a subscription and send a message.
 console.log("onConnect");
 client.subscribe("telemetry/snapshot");
+
 }
 
 // called when the client loses its connection
@@ -35,41 +44,49 @@ console.log("onConnectionLost:"+responseObject.errorMessage);
 
 var messageCallback = function(message){
 };
-var test = function(message){
-};
+
 // called when a message arrives
 function onMessageArrived(message) {
-	var messageParameters = [];
-	messageParameters = message.payloadString.split(";");
-	console.log(messageParameters);
-	var valueList = [];
-	var values = {};
-	var carID = messageParameters[0].split(":");
-	var temp = "";
-	for (var i = 1; i < carID.length; i++) {
-		temp += carID[i] + ":";	
-	}
-	temp = temp.substring(0, temp.length-1);
-	values.carID = temp;
+	console.log("detta är destinationName: "+message.destinationName);
 
-	for (var i = 1; i < messageParameters.length; i++) {
-		console.log(i + ": ");
-		var temp = messageParameters[i].split(":");
-		valueList.push(temp[1]);
-		console.log(temp[1]);
-	}
-	var time = new Date(parseInt(valueList[0]));
-	values.timestamp = time.toLocaleTimeString();
-	values.date = time.toLocaleDateString();
-	values.fuel = valueList[1];
-	values.speed = valueList[2];
-	values.distanceTraveled = valueList[3];
-	values.location = valueList[5] + ", " + valueList[4];
+	if (message.destinationName === globalDeviceID + "/config") {
+		console.log(message.payloadString);
+		configCallback(message.payloadString);
+	} else {
 
-	console.log("första"+valueList[4]);
-	console.log("andra"+valueList[5]);
-	console.log("onMessageArrived:"+message.payloadString);
-	messageCallback(values)
+		var messageParameters = [];
+		messageParameters = message.payloadString.split(";");
+		console.log(messageParameters);
+		var valueList = [];
+		var values = {};
+		var carID = messageParameters[0].split(":");
+		var temp = "";
+		for (var i = 1; i < carID.length; i++) {
+			temp += carID[i] + ":";	
+		}
+		temp = temp.substring(0, temp.length-1);
+		values.carID = temp;
+
+		for (var i = 1; i < messageParameters.length; i++) {
+			console.log(i + ": ");
+			var temp = messageParameters[i].split(":");
+			valueList.push(temp[1]);
+			console.log(temp[1]);
+		}
+		var time = new Date(parseInt(valueList[0]));
+		values.timestamp = time.toLocaleTimeString();
+		values.date = time.toLocaleDateString();
+		values.fuel = valueList[1];
+		values.speed = valueList[2];
+		values.distanceTraveled = valueList[3];
+		values.location = valueList[5] + ", " + valueList[4];
+
+		console.log("första"+valueList[4]);
+		console.log("andra"+valueList[5]);
+		console.log("onMessageArrived:"+message.payloadString);
+		messageCallback(values);
+	}
+	
 };
 
 return {
@@ -79,8 +96,16 @@ return {
 		connectMqtt();
 	},
 
-	test: function(argument) {
+	updateConfigOnDB: function(argument) {
 		updateConfig(argument);
+	},
+
+	requestConfigOnDB: function(callback, argument) {
+		requestConfig(argument);
+		configCallback = callback;
+	},
+	standardConnect: function(){
+		connectMqtt();
 	}
 };
 });

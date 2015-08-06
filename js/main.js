@@ -3,11 +3,11 @@ var app = angular.module('app', ['dx', 'ui.router'])
 .config(function ($stateProvider) {
 	$stateProvider
 	.state('dashboard', {
-      url: "",
-      templateUrl: "dashboard.html",
-      controller: 'MainController'
+		url: "",
+		templateUrl: "dashboard.html",
+		controller: 'MainController'
 
-    })
+	})
 	.state('statistics', {
 		url: "/statistics",
 		templateUrl: "statistics.html",
@@ -28,5 +28,6 @@ var app = angular.module('app', ['dx', 'ui.router'])
 })
 
 .run(['$state', function ($state) {
-   $state.transitionTo('dashboard');
+	$state.transitionTo('dashboard');
 }])
+

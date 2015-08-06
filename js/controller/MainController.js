@@ -83,7 +83,7 @@ app.controller('MainController', ['$scope','$interval', 'MqttService', function(
 		height: 900,
 		width: "100%",
 		autoAdjust: false,
-		center: "skane",
+		center: "Sweden",
 		zoom: 5,
 		controls: true,
 		onContentReady: function(e) {
