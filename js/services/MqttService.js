@@ -7,6 +7,7 @@ var	updateConfig = function(argument){
   	client.send(message);
 };
 var globalDeviceID;
+
 var requestConfig = function(deviceID){
 	globalDeviceID = deviceID;
 	client.subscribe(deviceID + "/config");

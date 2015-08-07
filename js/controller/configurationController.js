@@ -59,9 +59,16 @@ app.controller('configurationController', ['$scope', 'MqttService', function($sc
 	$scope.submitCarID = function(){
 		mqttService.requestConfigOnDB(function(message){
 			var configBuild = message.split("\n");
-			for (var i = 0; i < configBuild.length; i++) {
-				$scope.configObjects.push({"Key":configBuild[i].split("#")[0],"Value":configBuild[i].split("#")[1]});
-		}
+			var values = [];
+			console.log("här är mina values");
+			for (var i = 0; i < configBuild.length-1; i++) {
+				values.push(configBuild[i].split("#")[1]);
+				console.log(values);
+				//$scope.configObjects.push({"Key":configBuild[i].split("#")[0],"Value":configBuild[i].split("#")[1]});
+			}
+			$scope.ip = values[0];
+			$scope.connectionPort = values[1];
+			$scope.interval = values[2];
 			$scope.$apply();
 		}, $scope.carID);
 		console.log("Nu kicka du på device id");
