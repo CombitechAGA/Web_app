@@ -16,6 +16,12 @@ var requestConfig = function(deviceID){
 	client.send(message);
 };
 
+var sendMessage = function(text){
+	message = new Paho.MQTT.Message(text);
+	message.destinationName = globalDeviceID+"/message";
+	client.send(message);
+};
+
 var connectMqtt = function () {
 		// Create a client instance
 	client = new Paho.MQTT.Client("mqtt.phelicks.net", 9001, "clientId");
@@ -107,6 +113,10 @@ return {
 	},
 	standardConnect: function(){
 		connectMqtt();
+	}, 
+
+	send: function(text){
+		sendMessage(text);
 	}
 };
 });

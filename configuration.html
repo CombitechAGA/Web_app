@@ -4,13 +4,19 @@
 		<br>
 		<input type="text" class="form-control" ng-model="ip">
 		<br>
+		<input type="text" class="form-control" ng-model="homePosision">
+		<br>
+		<input type="text" class="form-control" ng-model="margin">
+		<br>
 		<input type="text" class="form-control" ng-model="subscribe">
 		<br>
 		<input type="text" class="form-control" ng-model="unSubscribe">
 	</div>
 	<div class = "col-md-1">
-		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='submitCarID()' type="submit">Submit</button>
-		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateIP()' type="submit">Update</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='submitCarID()' type="submit">Submit id</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateIP()' type="submit">Update ip</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateHome()' type="submit">Set posision</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='setMargin()' type="submit">Set margin</button>
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='subscribeToTopic()' type="submit">Subscribe</button>
 		<button style="margin-bottom:20px;" class="btn btn-danger" ng-click='unSubscribeToTopic()' type="submit">Unsubscribe</button>
 	</div>
@@ -20,19 +26,18 @@
 		<input type="text" class="form-control" ng-model="interval">
 		<br>
 		<input type="text" class="form-control" ng-model="deviceName">
+		<br>
+		<input type="text" class="form-control" ng-model="messageToSend">
+		<br>
+		<input type="text" class="form-control" ng-model="zoomLvl">
+
 		
 	</div>
 	<div class = "col-md-1">
-		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updatePort()' type="submit">Update</button>
-		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateInterval()' type="submit">Update</button>
-
-		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateName()'type="submit">Update</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updatePort()' type="submit">Update port</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateInterval()' type="submit">Update interval</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateName()'type="submit">Update name</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='message()'type="submit">Send message</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateZoom()'type="submit">Update zoom</button>
 	</div>
 </div>
-
-<table style="color:green">
-	<tr ng-repeat="x in configObjects">
-		<td>{{x.Key}}</td>
-		<td>{{x.Value}}</td>
-		</tr>
-</table>

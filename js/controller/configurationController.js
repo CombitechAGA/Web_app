@@ -7,12 +7,37 @@ app.controller('configurationController', ['$scope', 'MqttService', function($sc
 	$scope.interval = "New snapshot-interval.";
 	$scope.deviceName = "New device name.";
 	$scope.carID = "Car id must be entered or the update will fail!";
+	$scope.messageToSend = "Enter a message you would like to send to the registered Zbee."
 	$scope.configObjects = [];
-
+	$scope.homePosision = "New home posision"
+	$scope.zoomLvl = "";
+	$scope.margin = "";
 
 	 if(typeof mqttService.client === 'undefined'){
    			mqttService.standardConnect();
  	}
+
+ 	
+ 	$scope.setMargin = function(){
+ 		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";margin:"+$scope.margin);
+ 	};
+
+ 	$scope.updateHome = function(){
+ 		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";home:"+$scope.homePosision);
+ 	};
+
+ 	$scope.updateZoom = function(){
+ 		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";zoom:"+$scope.zoomLvl);
+ 	};
 
 
 	$scope.subscribeToTopic = function(){
@@ -56,22 +81,34 @@ app.controller('configurationController', ['$scope', 'MqttService', function($sc
 			mqttService.updateConfigOnDB("id:"+ $scope.carID+ ";interval:"+$scope.interval);
 	};
 
+	$scope.message = function(){
+		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.send($scope.messageToSend);
+	};
+
 	$scope.submitCarID = function(){
-		mqttService.requestConfigOnDB(function(message){
-			var configBuild = message.split("\n");
-			var values = [];
-			console.log("här är mina values");
-			for (var i = 0; i < configBuild.length-1; i++) {
-				values.push(configBuild[i].split("#")[1]);
-				console.log(values);
-				//$scope.configObjects.push({"Key":configBuild[i].split("#")[0],"Value":configBuild[i].split("#")[1]});
-			}
-			$scope.ip = values[0];
-			$scope.connectionPort = values[1];
-			$scope.interval = values[2];
-			$scope.$apply();
-		}, $scope.carID);
-		console.log("Nu kicka du på device id");
+		if ($scope.carID === "Car id must be entered or the update will fail!") {
+			confirm("Enter a valid car id!");
+		} else {
+			mqttService.requestConfigOnDB(function(message){
+				var configBuild = message.split("\n");
+				var values = [];
+				for (var i = 0; i < configBuild.length-1; i++) {
+					values.push(configBuild[i].split("#")[1]);
+					console.log(values);
+					//$scope.configObjects.push({"Key":configBuild[i].split("#")[0],"Value":configBuild[i].split("#")[1]});
+				}
+				$scope.ip = values[0];
+				$scope.connectionPort = values[1];
+				$scope.interval = values[2];
+				$scope.homePosision = values[6]
+				$scope.zoomLvl = values[7]
+				$scope.margin = values[8]
+				$scope.$apply();
+			}, $scope.carID);
+		}
 	};	
 }]);
  
