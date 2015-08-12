@@ -24,6 +24,16 @@ var app = angular.module('app', ['dx', 'ui.router'])
 		templateUrl: 'configuration.html',
 		controller: 'configurationController'
 	})
+	.state('message', {
+		url: '/message',
+		templateUrl: 'message.html',
+		controller: 'messageController'
+	})
+	.state('newzbee', {
+		url: '/new_zbee',
+		templateUrl: 'newZbee.html',
+		controller: 'newZbeeController'
+	})
 
 })
 

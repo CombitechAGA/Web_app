@@ -8,15 +8,19 @@
 		<br>
 		<input type="text" class="form-control" ng-model="margin">
 		<br>
+		<input type="text" class="form-control" ng-model="mode">
+		<br>
 		<input type="text" class="form-control" ng-model="subscribe">
 		<br>
 		<input type="text" class="form-control" ng-model="unSubscribe">
+		
 	</div>
 	<div class = "col-md-1">
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='submitCarID()' type="submit">Submit id</button>
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateIP()' type="submit">Update ip</button>
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateHome()' type="submit">Set posision</button>
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='setMargin()' type="submit">Set margin</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='setMode()' type="submit">Set mode</button>
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='subscribeToTopic()' type="submit">Subscribe</button>
 		<button style="margin-bottom:20px;" class="btn btn-danger" ng-click='unSubscribeToTopic()' type="submit">Unsubscribe</button>
 	</div>
@@ -30,7 +34,8 @@
 		<input type="text" class="form-control" ng-model="messageToSend">
 		<br>
 		<input type="text" class="form-control" ng-model="zoomLvl">
-
+		<br>
+		<input type="text" class="form-control" ng-model="geoFenceRadius">
 		
 	</div>
 	<div class = "col-md-1">
@@ -39,5 +44,6 @@
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateName()'type="submit">Update name</button>
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='message()'type="submit">Send message</button>
 		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateZoom()'type="submit">Update zoom</button>
+		<button style="margin-bottom:20px;" class="btn btn-success" ng-click='updateGeoFence()' type="submit">Update radius</button>
 	</div>
 </div>

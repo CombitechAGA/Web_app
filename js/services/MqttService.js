@@ -1,7 +1,15 @@
 app.factory('MqttService', function(){
 
-var	updateConfig = function(argument){
+var createConfigOnDB = function(argument){
 
+	console.log("nu är jag i functionen med argument: " + argument);
+
+	message = new Paho.MQTT.Message(argument);
+	message.destinationName = "new/config";
+	client.send(message);
+}
+
+var	updateConfig = function(argument){
 	message = new Paho.MQTT.Message(argument);
   	message.destinationName = "set/config";
   	client.send(message);
@@ -98,6 +106,10 @@ function onMessageArrived(message) {
 
 return {
 
+	setDeviceID: function(deviceID) {
+		globalDeviceID = deviceID;
+	},
+
 	connect: function (callback) {
 		messageCallback = callback;
 		connectMqtt();
@@ -117,6 +129,9 @@ return {
 
 	send: function(text){
 		sendMessage(text);
+	},
+	create: function(text){
+		createConfigOnDB(text);
 	}
 };
 });

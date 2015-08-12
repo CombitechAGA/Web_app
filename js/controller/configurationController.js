@@ -10,14 +10,29 @@ app.controller('configurationController', ['$scope', 'MqttService', function($sc
 	$scope.messageToSend = "Enter a message you would like to send to the registered Zbee."
 	$scope.configObjects = [];
 	$scope.homePosision = "New home posision"
-	$scope.zoomLvl = "";
-	$scope.margin = "";
+	$scope.zoomLvl = "Zoom level for the map";
+	$scope.margin = "Margin for point of now return in kilometers";
+	$scope.geoFenceRadius = "Geofence radius from home posision in meters";
+	$scope.mode = "CORS mode, enter true or false";
 
 	 if(typeof mqttService.client === 'undefined'){
    			mqttService.standardConnect();
  	}
 
- 	
+ 		$scope.setMode = function(){
+ 		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";simulator:"+$scope.mode);
+ 	};
+
+ 	$scope.updateGeoFence = function(){
+ 		if ($scope.carID === "Car id must be entered or the update will fail!")
+			confirm("Enter a valid car id!");
+		else 
+			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";geofence:"+$scope.geoFenceRadius);
+ 	};
+
  	$scope.setMargin = function(){
  		if ($scope.carID === "Car id must be entered or the update will fail!")
 			confirm("Enter a valid car id!");
