@@ -3,13 +3,14 @@ app.factory('MqttService', function(){
 var createConfigOnDB = function(argument){
 
 	console.log("nu är jag i functionen med argument: " + argument);
-
+	client.subscribe(globalDeviceID + "/failedToCreateNewDevice");
 	message = new Paho.MQTT.Message(argument);
 	message.destinationName = "new/config";
 	client.send(message);
 }
 
 var	updateConfig = function(argument){
+	client.subscribe(globalDeviceID+"/failedToUpdate")
 	message = new Paho.MQTT.Message(argument);
   	message.destinationName = "set/config";
   	client.send(message);
@@ -65,10 +66,19 @@ function onMessageArrived(message) {
 	console.log("detta är destinationName: "+message.destinationName);
 
 	if (message.destinationName === globalDeviceID + "/config") {
+		console.log("/config");
 		console.log(message.payloadString);
 		configCallback(message.payloadString);
-	} else {
+	}
+	else if (message.destinationName === globalDeviceID + "/failedToCreateNewDevice") {
+		console.log("failedToCreateNewDevice")
+		confirm(message.payloadString);
 
+	}
+	else if (message.destinationName === globalDeviceID+"/failedToUpdate") {
+		confirm(message.payloadString);
+	} else {
+		console.log("/else");
 		var messageParameters = [];
 		messageParameters = message.payloadString.split(";");
 		console.log(messageParameters);
