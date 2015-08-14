@@ -29,7 +29,7 @@ app.controller('newZbeeController', ['$scope', 'MqttService', function($scope, m
 		else{
 			console.log("nu körs createConfigOnDB")
 			mqttService.setDeviceID($scope.carID);
-			mqttService.create("id:"+ $scope.carID+ ";broker:" + $scope.ip + ";port:"+$scope.connectionPort+";interval:"+$scope.interval+ ";User:"+$scope.userName+";password:"+$scope.password+";qos:"+$scope.qos+";home:"+$scope.homePosision+";zoom:"+$scope.zoomLvl+";margin:"+$scope.margin+";geofence:"+$scope.geoFenceRadius+";simulator:"+$scope.mode);
+			mqttService.create("id:"+ $scope.carID+ ";broker:" + $scope.ip + ";port:"+$scope.connectionPort+";interval:"+$scope.interval+ ";User:"+$scope.userName+";password:"+$scope.password+";qos:"+$scope.qos+";home:"+$scope.homePosision+";zoom:"+$scope.zoomLvl+";margin:"+$scope.margin+";geofence:"+$scope.geoFenceRadius+";simulator:"+$scope.mode + ";devicename:" + $scope.deviceName);
 		} 
 
 	};	

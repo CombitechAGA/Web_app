@@ -16,9 +16,11 @@ app.controller('MainController', ['$scope','$interval', 'MqttService', function(
 			fuel: car.fuel,
 			speed: car.speed,
 			distanceTraveled: car.distanceTraveled,
+			zbeename: car.zbeename,
 			tooltip: {
-				text: "<strong> Car ID: " 
-				+ car.carID+"</strong></br>" 
+				text: "<strong> Name: " 
+				+ car.zbeename + "</strong></br>" 
+				+ "Car ID: " + car.carID+"</br>" 
 				+ "Time: " + car.date + " " + car.timestamp + "</br>" 
 				+ "Fuel: " + car.fuel + "</br>" 
 				+ "Speed: " + car.speed + "</br>" 

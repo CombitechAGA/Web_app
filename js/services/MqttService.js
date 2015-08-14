@@ -105,9 +105,8 @@ function onMessageArrived(message) {
 		values.speed = valueList[2];
 		values.distanceTraveled = valueList[3];
 		values.location = valueList[5] + ", " + valueList[4];
-
-		console.log("första"+valueList[4]);
-		console.log("andra"+valueList[5]);
+		values.zbeename = valueList[6];
+		console.log("name"+valueList[6]);
 		console.log("onMessageArrived:"+message.payloadString);
 		messageCallback(values);
 	}
