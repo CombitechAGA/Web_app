@@ -34,6 +34,11 @@ var app = angular.module('app', ['dx', 'ui.router'])
 		templateUrl: 'newZbee.html',
 		controller: 'newZbeeController'
 	})
+	.state('mission', {
+		url: '/mission',
+		templateUrl: 'mission.html',
+		controller: 'missionController'
+	})
 
 })
 
