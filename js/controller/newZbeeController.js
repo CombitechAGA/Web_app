@@ -5,8 +5,8 @@ app.controller('newZbeeController', ['$scope', 'MqttService', function($scope, m
 	$scope.ip = "New ip-address.";
 	$scope.connectionPort = "New port.";
 	$scope.interval = "New snapshot-interval.";
-	$scope.deviceName = "New device name.";
-	$scope.carID = "Car id must be entered or the update will fail!";
+	$scope.deviceName = "New Vehicle name.";
+	$scope.carID = "Vehicle id must be entered or the update will fail!";
 	$scope.userName = "User name for the mqtt server";
 	$scope.password = "Passord for the mqtt server";
 	$scope.configObjects = [];
@@ -22,9 +22,9 @@ app.controller('newZbeeController', ['$scope', 'MqttService', function($scope, m
 	}
 
 	$scope.createZbee = function(){
-		if ($scope.carID === "Car id must be entered or the update will fail!"){
+		if ($scope.carID === "Vehicle id must be entered or the update will fail!"){
 			console.log("ändra fältet!!")
-			confirm("Enter a valid car id!");
+			confirm("Enter a valid Vehicle id!");
 		}
 		else{
 			console.log("nu körs createConfigOnDB")

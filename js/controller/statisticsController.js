@@ -42,7 +42,7 @@ $scope.dataSource = [{
     area: 55
 }];
 
-$scope.location = "Zbee position";
+$scope.location = "Vehicle position";
 
 $scope.updateLocation = function () {
     console.log($scope.location);

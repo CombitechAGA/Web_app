@@ -5,9 +5,8 @@ app.controller('configurationController', ['$scope', 'MqttService', function($sc
 	$scope.ip = "New ip-address.";
 	$scope.connectionPort = "New port.";
 	$scope.interval = "New snapshot-interval.";
-	$scope.deviceName = "New device name.";
-	$scope.carID = "Car id must be entered or the update will fail!";
-	$scope.messageToSend = "Enter a message you would like to send to the registered Zbee."
+	$scope.deviceName = "New Vehicle name.";
+	$scope.carID = "Vehicle id must be entered or the update will fail!";
 	$scope.configObjects = [];
 	$scope.homePosision = "New home posision"
 	$scope.zoomLvl = "Zoom level for the map";
@@ -20,93 +19,87 @@ app.controller('configurationController', ['$scope', 'MqttService', function($sc
  	}
 
  		$scope.setMode = function(){
- 		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+ 		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";simulator:"+$scope.mode);
  	};
 
  	$scope.updateGeoFence = function(){
- 		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+ 		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";geofence:"+$scope.geoFenceRadius);
  	};
 
  	$scope.setMargin = function(){
- 		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+ 		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";margin:"+$scope.margin);
  	};
 
  	$scope.updateHome = function(){
- 		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+ 		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";home:"+$scope.homePosision);
  	};
 
  	$scope.updateZoom = function(){
- 		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+ 		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";zoom:"+$scope.zoomLvl);
  	};
 
 
 	$scope.subscribeToTopic = function(){
-		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";subscribe:"+$scope.subscribe);
 	};
 
 	$scope.unSubscribeToTopic = function(){
-		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";unsubscribe:"+$scope.unSubscribe);
 	};
 
 	$scope.updateIP = function(){
-		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";ip:"+$scope.ip);
 	};
 
 	$scope.updatePort = function(){
-		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";port:"+$scope.connectionPort);
 	};
 
 	$scope.updateName = function(){
-		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID + ";devicename:"+$scope.deviceName);
 	};
 	$scope.updateInterval = function(){
-		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
+		if ($scope.carID === "Vehicle id must be entered or the update will fail!")
+			confirm("Enter a valid Vehicle id!");
 		else 
 			mqttService.updateConfigOnDB("id:"+ $scope.carID+ ";interval:"+$scope.interval);
 	};
 
-	$scope.message = function(){
-		if ($scope.carID === "Car id must be entered or the update will fail!")
-			confirm("Enter a valid car id!");
-		else 
-			mqttService.send($scope.messageToSend);
-	};
-
 	$scope.submitCarID = function(){
-		if ($scope.carID === "Car id must be entered or the update will fail!") {
-			confirm("Enter a valid car id!");
+		if ($scope.carID === "Vehicle id must be entered or the update will fail!") {
+			confirm("Enter a valid Vehicle id!");
 		} else {
+
 			mqttService.requestConfigOnDB(function(message){
 				var configBuild = message.split("\n");
 				var values = [];
@@ -121,6 +114,9 @@ app.controller('configurationController', ['$scope', 'MqttService', function($sc
 				$scope.homePosision = values[6]
 				$scope.zoomLvl = values[7]
 				$scope.margin = values[8]
+				$scope.geoFenceRadius = values[9];
+				$scope.mode = values[10];
+				$scope.deviceName = values[11];
 				$scope.$apply();
 			}, $scope.carID);
 		}
