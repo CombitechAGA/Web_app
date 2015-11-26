@@ -11,18 +11,22 @@
 	<script src="js/lib/globalize.js"></script> 
 	<script src="js/lib/angular-ui-router.js"></script>
 	<script src="js/lib/dx.webappjs.js"></script>
+    <script src="js/lib/angular-resource.js"></script>
 	<script type="text/javascript" src="http://cdn3.devexpress.com/jslib/15.1.4/js/dx.chartjs.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/controller/MainController.js"></script>
 	<script src="js/mqttws31.js"></script>
 	<script src="js/services/MqttService.js"></script>
 	<script src="js/services/DataBaseService.js"></script>
+    <script src="js/services/SimJobService.js"></script>
+    <script src="js/services/NewSimJobService.js"></script>
 	<script src="js/controller/statisticsController.js"></script>
 	<script src="js/controller/configurationController.js"></script>
 	<script src="js/controller/newZbeeController.js"></script>
 	<script src="js/controller/messageController.js"></script>
 	<script src="js/controller/missionController.js"></script>
-
+    <script src="js/controller/simulateController.js"></script>
+    <script src="js/controller/newsimjobController.js"></script>
 </head>
 <body style="background-color:#343434">
 	<nav class="navbar navbar-inverse navbar-static-top">
@@ -50,7 +54,7 @@
 					<li ui-sref-active="active"><a ui-sref="message">Message</a></li>
 					<li ui-sref-active="active"><a ui-sref="mission">Mission</a></li>
 					<li ui-sref-active="active"><a ui-sref="newzbee">Add new vehicle</a></li>
-					
+                    <li ui-sref-active="active"><a ui-sref="simulate">Simulate Vehicles</a></li>
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->

@@ -1,4 +1,4 @@
-var app = angular.module('app', ['dx', 'ui.router'])
+var app = angular.module('app', ['dx', 'ui.router', 'ngResource'])
 
 .config(function ($stateProvider) {
 	$stateProvider
@@ -39,6 +39,16 @@ var app = angular.module('app', ['dx', 'ui.router'])
 		templateUrl: 'mission.html',
 		controller: 'missionController'
 	})
+ 	.state('simulate', {
+	    url: '/simulate',
+	    templateUrl: 'simulate.html',
+	    controller: 'simulateController'
+	})
+ 	.state('newsimjob', {
+ 	    url: '/simulate/newsimjob',
+ 	    templateUrl: 'newsimjob.html',
+ 	    controller: 'newsimjobController'
+ 	})
 
 })
 
